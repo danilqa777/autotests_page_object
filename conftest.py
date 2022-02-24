@@ -27,7 +27,7 @@ def setup(request, get_webdriver):
         request.cls.driver = driver
     page = AuthPage(driver)
     page.email = 'ddsvyatov1'
-    page.password = 'Asdwsx12!'
+    page.password = '123123123'
     page.btn.click()
     yield driver
     driver.quit()
