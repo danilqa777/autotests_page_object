@@ -38,8 +38,8 @@ def setup_product(request, get_webdriver):
     if request.cls is not None:
         request.cls.driver = driver
     page = AuthPageProduct(driver)
-    page.email = 'ddsvyatov1'
-    page.password = 'Asdwsx12!'
+    page.email = 'login'
+    page.password = 'password'
     page.btn.click()
     yield driver
     driver.quit()
