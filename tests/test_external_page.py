@@ -9,7 +9,7 @@ from pages.elements import WebElement
 @pytest.mark.usefixtures('setup')
 class TestHomePageSearch:
 
-    def test_serch_norman(self):
+    def test_serch_normal(self):
         """ Поиск с валидныи названием продукта работает корректно  """
 
         page = MainPage(self.driver)
@@ -85,14 +85,42 @@ class TestHomePageSearch:
         assert page.closed.is_clickable() == False
         pass
 
+    def test_search_from_product(self):
+        """ Поиск с валидныи из другого продукта  """
+
+        page = MainPage(self.driver)
+        page.product_title.click()
+        time.sleep(5)
+        page.search1.click()
+        page.search = 'МТС Тестирование'
+        page.search.send_keys('\ue007')
+        page.wait_page_loaded()
+        page.product_title.click()
+        time.sleep(5)
+        link = page.get_current_url()
+        assert link == 'https://stage.prodboard.mts.ru/preset/internal/product/BI_1262/main-info'
+
+
+
+
 
 @pytest.mark.usefixtures('setup')
 class TestNavigationBar:
 
     def test_categori(self):
+        """   """
 
         page = MainPage(self.driver)
-        print(page.categories.get_text())
+        assert page.categories.get_text() == ['Product Governance', 'МТС Банк (базовые)', 'Легкий старт', 'Телеком (базовые)', 'Партнерские', 'Big Data', 'МТС ИИ', 'Сайты', 'Другое']
+        time.sleep(3)
+        assert page.caunt_PG.get_text() == '100'
+        page.wait_page_loaded()
+        time.sleep(5)
+
+    def test_cat123213egori(self):
+        page = MainPage(self.driver)
+        page.caunt.find()
+        print(page.caunt.get_text())
 
 
 

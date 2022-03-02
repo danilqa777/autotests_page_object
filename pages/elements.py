@@ -1,9 +1,5 @@
-#!/usr/bin/python3
-# -*- encoding=utf8 -*-
-
 import time
 from termcolor import colored
-
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -169,6 +165,27 @@ class WebElement(object):
         if self._wait_after_click:
             self._page.wait_page_loaded()
 
+    def chain(self, x_offset, y_offset):
+        """ Wait and click the element. """
+
+        element = self.wait_to_be_clickable()
+
+        if element:
+            action = ActionChains(self._web_driver)
+            action.drag_and_drop_by_offset(element, x_offset, y_offset).perform()
+        else:
+            msg = 'Element with locator {0} not found'
+            raise AttributeError(msg.format(self._locator))
+
+
+    def drag_marker_on_map(self, endx, endy):
+        actions = ActionChains(self._web_driver)
+        element = self.find()
+
+        actions.drag_and_drop_by_offset(element, endx, endy)
+        actions.perform()
+
+        
     def right_mouse_click(self, x_offset=0, y_offset=0, hold_seconds=0):
         """ Click right mouse button on the element. """
 
@@ -219,6 +236,10 @@ class WebElement(object):
         # Delete element:
         self._web_driver.execute_script("arguments[0].remove();", element)
 
+    def click_and_hold(self, on_element=None):
+
+        if on_element:
+            self.move
 
 class ManyWebElements(WebElement):
 
