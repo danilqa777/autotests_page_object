@@ -9,7 +9,7 @@ class TestMainInfo:
         """ Отображение ФИО в руководстве  """
 
         page = ProductPage(self.driver)
-        assert page.owners.get_text() == ['Зиборова Ольга Николаевна', 'Мельникова Елена Андреевна', 'Фролова Ольга Сергеевна', 'Фролова Ольга Сергеевна', 'Фарафонов Владимир Николаевич']
+        assert page.owners_text.get_text() == ['Зиборова Ольга Николаевна', 'Мельникова Елена Андреевна', 'Фролова Ольга Сергеевна', 'Фролова Ольга Сергеевна', 'Фарафонов Владимир Николаевич']
 
     def test_owners_clickable(self):
         """ Проверка кликабелности ФИО руководства  """
@@ -26,11 +26,11 @@ class TestMainInfo:
         assert page.metrics_iframe.is_visible()
 
     def test_metrics_iframe_none(self):
-        # Проверка отображения текста если по продукта не ведется сбор данных iframe
+        """ Проверка отображения текста если по продукта не ведется сбор данных iframe  """
 
-       page = ProductPage(self.driver)
-       page.get("https://stage.prodboard.mts.ru/preset/internal/product/BI_202/metrics")
-       assert page.metrics_iframe_none.get_text() == 'Сбор метрик по данному проекту не ведётся'
+        page = ProductPage(self.driver)
+        page.get("https://stage.prodboard.mts.ru/preset/internal/product/BI_202/metrics")
+        assert page.metrics_iframe_none.get_text() == 'Сбор метрик по данному проекту не ведётся'
 
     def test_eco_modul(self):
         """ Проверка отображения графиков экосистемных связей  """
@@ -40,12 +40,19 @@ class TestMainInfo:
         assert page.eco_grafs.is_visible()
 
     def test_eco_modul_error(self):
-        """ Проверка что графики не отображаются если нет экосистемных связей  """
+        """ Проверка корректности текста если нет экосистемных связей  """
 
         page = ProductPage(self.driver)
         page.get("https://stage.prodboard.mts.ru/preset/internal/product/BI_202/metrics")
         page.eco_tab.click()
-        assert page.eco_grafs.is_visible() == False
+        assert page.eco_error.get_text() == 'Интеграция с Экосистемными продуктовыми модулями отсутствует'
+
+    def test_eco_prod_links(self):
+        """ Проверка кликабельности продуктов в экосистемных модулях  """
+
+        page = ProductPage(self.driver)
+        page.eco_tab.click()
+        assert page.eco_prod_links.is_clickable()
 
     def test_open_atomic_link(self):
         """ Изменение ссылки при открытии атомарного продукта  """
@@ -76,7 +83,7 @@ class TestMainInfo:
         page = ProductPage(self.driver)
         page.get("https://stage.prodboard.mts.ru/preset/internal/product/BI_202/metrics")
         page.atomic_tab.click()
-        assert page.atomic_none.get_text() == 'Нет данных.'
+        assert page.atomic_none.get_text() == '«Гео» не содержит в своем составе атомарные продукты'
 
     def test_open_techno_link(self):
         """ Изменение ссылки при открытии технологического продукта  """
@@ -84,16 +91,24 @@ class TestMainInfo:
         page = ProductPage(self.driver)
         page.techno_tab.click()
         page.techno_opening.click()
+        time.sleep(3)
         link = page.get_current_url()
         assert link == 'https://stage.prodboard.mts.ru/preset/external/product/BI_60/techno?openTechno=1089'
+
+    def test_open_techno_lead_clickable(self):
+        """ Проверка кликабелности РО на всех технологических продуктах  """
+
+        page = ProductPage(self.driver)
+        page.techno_tab.click()
+        assert page.techno_lead.is_clickable()
 
     def test_techno_error(self):
         """ При отсутсвии технологических продуктов отображен корректный текст  """
 
         page = ProductPage(self.driver)
-        page.get("https://stage.prodboard.mts.ru/preset/internal/product/BI_230/main-info")
+        page.get("https://stage.prodboard.mts.ru/preset/internal/product/BI_1262/main-info")
         page.techno_tab.click()
-        assert page.techno_none.get_text() == 'Нет данных.'
+        assert page.techno_none.get_text() == '«МТС Тестирование» не имеет связей с технологическими продуктами.'
 
     def test_open_projects(self):
         """ Отображение таблицы проектов Хайпиреон  """
@@ -124,4 +139,4 @@ class TestMainInfo:
         page = ProductPage(self.driver)
         page.get("https://stage.prodboard.mts.ru/preset/internal/product/BI_202/main-info")
         page.doc_tab.click()
-        assert page.docs_none.get_text() == 'Документы не прикреплены.'
+        assert page.docs_none.get_text() == 'Документы не прикреплены'

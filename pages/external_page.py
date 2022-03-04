@@ -18,14 +18,17 @@ class MainPage(WebPage):
     # Закрытая строка поиска
     search1 = WebElement(class_name='productSearchInput')
 
-    # Счетчик продуктов
-    caunt_PG = WebElement(css_selector='#Governance .counter')
-
     # Крестик на строке поиска
     closed = WebElement(class_name='suffixIcon')
 
     # Название одного продукта из блока
     product_title = WebElement(css_selector='.productList .header')
+
+    # Кирпичи продуктов
+    products = ManyWebElements(class_name='productItem')
+
+    # Заголовок продукта внутри карточки
+    title_in_prod = WebElement(css_selector='.productHeader .name')
 
     # Названия в блоках продуктов
     products_titles = ManyWebElements(css_selector='.productList .header')
@@ -33,32 +36,86 @@ class MainPage(WebPage):
     # Категории продуктов
     categories = ManyWebElements(css_selector='.categoryNavigation .productsCategoryNavigation .name')
 
-    # кнопка "Показать все" для категорий продуктов
-    showmore = WebElement(class_name='showMore')
+    # ______________________________________________________________________________________________________________________________
 
-    # Категория продуктов Product Governance
-    category_PG = WebElement(xpath='//*[@id="ProductCategories"]/div[1]')
+    # Категория продуктов Product Governance --------------------
+    category_PG = WebElement(xpath='//*[@id="filtersBar"]/div/div[1]/div[1]/a')
 
-    # Категория продуктов Мтс банк(Базовае)
-    category_MTSBank = WebElement(xpath='//*[@id="ProductCategories"]/div[2]')
+    # Заголовок категории Product Governance
+    category_title_PG = WebElement(id='Governance')
 
-    # Категория продуктов Легкий старт
-    category_ezstart = WebElement(xpath='//*[@id="ProductCategories"]/div[3]')
+    # Категория продуктов Легкий старт --------------------
+    category_ezstart = WebElement(xpath='//*[@id="filtersBar"]/div/div[1]/div[2]/a')
 
-    # Категория продуктов Телеком(Базовае)
-    category_telecom = WebElement(xpath='//*[@id="ProductCategories"]/div[4]')
+    # Заголовок категории Легкий старт
+    category_title_ezstart = WebElement(id='Lightstart')
 
-    # Категория продуктов Партнерские
-    category_partner = WebElement(xpath='//*[@id="ProductCategories"]/div[5]')
+    # Категория продуктов Мтс банк(Базовае) --------------------
+    category_MTSBank = WebElement(xpath='//*[@id="filtersBar"]/div/div[1]/div[3]/a')
 
-    # Категория продуктов Big Data
-    category_bigdata = WebElement(xpath='//*[@id="ProductCategories"]/div[6]')
+    # Заголовок категории Мтс банк(Базовае)
+    category_title_MTSBank = WebElement(id='Bank')
 
-    # Категория продуктов МТС ИИ
-    category_mtsII = WebElement(xpath='//*[@id="ProductCategories"]/div[7]')
+    # Категория продуктов Телеком(Базовае) --------------------
+    category_telecom = WebElement(xpath='//*[@id="filtersBar"]/div/div[1]/div[4]/a')
 
-    # Категория продуктов Сайты
-    category_sites = WebElement(xpath='//*[@id="ProductCategories"]/div[8]')
+    # Заголовок категории Телеком(Базовае)
+    category_title_telecom = WebElement(id='Telecom')
 
-    # Категория продуктов Другое
-    category_other = WebElement(xpath='//*[@id="ProductCategories"]/div[9]')
+    # Категория продуктов Партнерские --------------------
+    category_partner = WebElement(xpath='//*[@id="filtersBar"]/div/div[1]/div[5]/a')
+
+    # Заголовок категории Партнерские
+    category_title_partner = WebElement(id='Partner')
+
+    # Категория продуктов Big Data --------------------
+    category_bigdata = WebElement(xpath='//*[@id="filtersBar"]/div/div[1]/div[6]/a')
+
+    # Заголовок категории Big Data
+    category_title_bigdata = WebElement(id='Bigdata')
+
+    # Категория продуктов МТС ИИ --------------------
+    category_mtsII = WebElement(xpath='//*[@id="filtersBar"]/div/div[1]/div[7]/a')
+
+    # Заголовок категории МТС ИИ
+    category_title_mtsII = WebElement(id='AI')
+
+    # Категория продуктов Сайты --------------------
+    category_sites = WebElement(xpath='//*[@id="filtersBar"]/div/div[1]/div[8]/a')
+
+    # Заголовок категории Сайты
+    category_title_sites = WebElement(id='Site')
+
+    # Категория продуктов Другое --------------------
+    category_other = WebElement(xpath='//*[@id="filtersBar"]/div/div[1]/div[9]/a')
+
+    # Заголовок категории Другое
+    category_title_other = WebElement(id='Other')
+
+    #______________________________________________________________________________________________________________________________
+
+    # Фильтр Рынок
+    filter_market = WebElement(xpath='//*[@id="filtersBar"]/div/div[2]/div[1]/div[1]/div[2]/div/div')
+
+    # Параметр B2B в фильтре рынок
+    b2b = WebElement(xpath='//*[@id="mts-portal-output"]/div[7]/div/div/div[3]')
+
+    # Чипс выбранного фильтра
+    filter_chips = WebElement(class_name='selectedValue')
+
+    # Первый по счету статус
+    status_item = WebElement(class_name='productStatusItem')
+
+    # Кнопка Добавить продукт
+    add_product = WebElement(xpath='//*[@id="filtersBar"]/div/div[3]/div[2]/div[1]')
+
+    # Кнопка добавления Внешнего продукта
+    add_ext = WebElement(link_text='Внешний')
+
+    # Кнопка добавления Внешнего продукта
+    add_int = WebElement(link_text='Внутренний')
+
+    # Кнопка добавления Внешнего продукта
+    add_tech = WebElement(link_text='Технологический')
+
+

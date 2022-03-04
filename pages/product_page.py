@@ -29,29 +29,41 @@ class ProductPage(WebPage):
     # Таб документов
     doc_tab = WebElement(xpath='//*[@id="app"]/div/div/div/div/div/div[3]/div[1]/div/div[7]')
 
-    # Блок "Руководство"
+    # Блок "Руководство" (CСсылки)
     owners = ManyWebElements(css_selector='.owners .link')
+
+    # Блок "Руководство" ( Текст )
+    owners_text = ManyWebElements(css_selector='.productOwner .name')
 
     # Анимация загрузки iframe на странице метрик
     metrics_iframe = WebElement(class_name='mts-loading-abp__item')
 
     # Текс при отсутвии метрик у продукта на станице метрик
-    metrics_iframe_none = WebElement(xpath='//*[@id="app"]/div/div/div/div/div/div[3]/div[2]/div[2]/div/div/div/div/div')
+    metrics_iframe_none = WebElement(class_name='messageMetrics')
 
     # Графики показывающие отображение экосистемных связей
     eco_grafs = WebElement(class_name='indicator')
+
+    # Ссылки на продукты в эко модулях
+    eco_prod_links = ManyWebElements(css_selector='.ecoModulesTable .link')
+
+    # Текст при отсутствии экосистемных связей
+    eco_error = WebElement(class_name='ecosystemsModules')
 
     # Открытие первого по счету атомарного продукта
     atom_opening = WebElement(class_name='markerCell')
 
     # Текст при отсутствии атомарных продуктов
-    atomic_none = WebElement(xpath='//*[@id="app"]/div/div/div/div/div/div[3]/div[2]/div[4]/div/div/div/div')
+    atomic_none = WebElement(xpath='//*[@id="app"]/div/div/div/div/div/div[3]/div[2]/div[4]')
 
     # Открытие первого по счету технологического продукта
-    techno_opening = WebElement(class_name='technoProductRow')
+    techno_opening = WebElement(class_name='marker')
 
     # Текст при отсутствии технологических продуктов
-    techno_none = WebElement(xpath='//*[@id="app"]/div/div/div/div/div/div[3]/div[2]/div[5]/div/div/div/div')
+    techno_none = WebElement(xpath='//*[@id="app"]/div/div/div/div/div/div[3]/div[2]/div[5]/div/div/div/div/div[1]')
+
+    # Технический лидер технологических продктов
+    techno_lead = WebElement(css_selector='.technoProductRow .owner .link')
 
     # Таблица проектов Hyperion
     hype_table = WebElement(class_name='projectsTable')

@@ -67,7 +67,7 @@ class WebElement(object):
     def is_visible(self):
         """ Check is the element visible or not. """
 
-        element = self.find(timeout=1)
+        element = self.find(timeout=10)
 
         if element:
             return element.is_displayed()
